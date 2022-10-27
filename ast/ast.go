@@ -1,6 +1,8 @@
 package ast
 
-import "github.com/nicholasanthonys/go-interpreter/token"
+import (
+	"github.com/nicholasanthonys/go-interpreter/token"
+)
 
 type Node interface {
 	TokenLiteral() string
@@ -47,4 +49,14 @@ type Identifier struct {
 func (l *Identifier) statementNode() {}
 func (ls *Identifier) TokenLiteral() string {
 	return ls.Token.Literal
+}
+
+type ReturnStatement struct {
+	Token       token.Token // the 'return' token
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatement) statementNode() {}
+func (rs *ReturnStatement) TokenLiteral() string {
+	return rs.Token.Literal
 }
